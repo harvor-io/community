@@ -54,6 +54,18 @@ When proposing a feature, explain the problem you're trying to solve rather than
 
 Understanding the underlying problem makes it easier to explore different solutions.
 
+## Service Standards
+
+[`FEATURES.md`](FEATURES.md) describes the cross-cutting features every Harvor
+service strives to provide so that services are dependable, easy to use,
+observable, and production ready (consistent REST conventions, idempotent writes,
+OpenTelemetry, configuration as code, and so on).
+
+When proposing or implementing a feature, or reviewing a pull request, use it as
+a reference for the baseline expected of a Harvor service. It's a target to design
+and review against rather than a gate every change must clear, and individual
+repositories may add their own standards on top of it.
+
 ## Making a Contribution
 
 The typical contribution workflow is:
@@ -151,7 +163,9 @@ In general:
 - Document exported or externally visible functionality.
 - Maintain backward compatibility when practical.
 
-Project-specific standards may be documented within individual repositories.
+See [`FEATURES.md`](FEATURES.md) for the cross-cutting standards Harvor services
+aim for. Project-specific standards may also be documented within individual
+repositories.
 
 ## Documentation
 
