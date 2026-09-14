@@ -31,6 +31,12 @@ There are many ways to contribute beyond writing code, including reporting bugs,
 
 Please read our [Contributing Guide](CONTRIBUTING.md) before getting started.
 
+## Governance
+
+Harvor follows a benevolent dictator governance model. Ideas and contributions from anyone are welcome, and many decisions are delegated to maintainers and contributors, but final direction rests with the project lead.
+
+See [`GOVERNANCE.md`](GOVERNANCE.md) for details.
+
 ## Community Guidelines
 
 We want Harvor to be a welcoming, constructive, and professional community.

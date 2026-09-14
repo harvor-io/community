@@ -12,6 +12,8 @@ For significant changes, new features, or architectural decisions, please start 
 
 Small bug fixes, documentation improvements, and other straightforward changes can generally go directly to a pull request.
 
+Harvor follows a benevolent dictator governance model: contributions and ideas from anyone are welcome, and many decisions are delegated to maintainers and contributors, but final say on direction and implementation rests with the project lead. See [`GOVERNANCE.md`](GOVERNANCE.md) for details.
+
 ## Finding Something to Work On
 
 Check the Issues tab of the Harvor repository you'd like to contribute to.
@@ -53,6 +55,43 @@ For larger ideas, new Harvor services, cross-project changes, or architectural p
 When proposing a feature, explain the problem you're trying to solve rather than only describing a particular implementation.
 
 Understanding the underlying problem makes it easier to explore different solutions.
+
+## Stability Labels
+
+Issues and pull requests should carry a stability label — `alpha`, `beta`, or `ga` — indicating the maturity level the feature or change is targeting.
+
+- **`alpha`** — Experimental. The API or behavior may change or be removed without notice. Suitable for early feedback, not for production use.
+- **`beta`** — Feature-complete and functionally stable, but still settling. Breaking changes are possible but will be called out; suitable for production use with that caveat.
+- **`ga`** — Generally available. Stable and covered by Harvor's normal compatibility and deprecation guarantees.
+
+Apply the label that matches what you're targeting when you open an issue or pull request. This helps maintainers and reviewers calibrate the level of scrutiny and set the right expectations — a `ga`-targeted change is held to a higher bar than an `alpha` one.
+
+See [Stability Labels](https://docs.harvor.io/reference/stability-labels) for the full definitions and policy.
+
+## Technology Standards
+
+Harvor services are written in **Go**, and web UIs are built with **React**. These are the defaults every new Harvor project should start from, and what contributors should expect when opening a PR.
+
+### Why Go for services
+
+- Compiles to a single static binary — no language runtime or dependency install step to ship or run, which is a big part of what makes Harvor services fast to start, easy to containerize, and simple to self-host.
+- Low memory footprint and fast startup keep containers small and services quick to scale, restart, and schedule — directly supporting the dependability and production-readiness goals in [`FEATURES.md`](FEATURES.md).
+- Built-in concurrency (goroutines, channels) maps naturally onto the I/O-bound, highly concurrent workloads that infrastructure services handle.
+- A small, stable language surface and explicit error handling keep services easy to read and review, including by someone who didn't write them — that matters across a multi-repo ecosystem maintained by many contributors.
+- First-class support across the rest of the stack Harvor relies on: gRPC, OpenTelemetry, Kubernetes tooling, and most cloud-native infrastructure treat Go as a primary target.
+- One language across services means a contributor who's worked on one Harvor repo can be productive in another immediately, without relearning idioms and tooling.
+
+### Why React for web UIs
+
+- The largest ecosystem and contributor pool of any UI framework, which lowers the barrier for new contributors to get productive quickly.
+- A mature component, accessibility, and tooling ecosystem to build on instead of reinventing.
+- Consistency across Harvor's web UIs, so contributors moving between projects share the same patterns and shared component libraries are actually reusable.
+
+### Exceptions
+
+These are defaults, not mandates. There are legitimate reasons to reach for something else — a tool that's a much better fit in another ecosystem, a constraint Go or React doesn't serve well. If you want to use something else, open a discussion or issue explaining why before investing significant time in it; exceptions are considered case by case rather than assumed.
+
+See [`PATTERNS.md`](PATTERNS.md) for the code-level patterns (service/repository layering, error handling, REST conventions, standard packages) Harvor codebases follow within this stack.
 
 ## Service Standards
 
@@ -164,8 +203,10 @@ In general:
 - Maintain backward compatibility when practical.
 
 See [`FEATURES.md`](FEATURES.md) for the cross-cutting standards Harvor services
-aim for. Project-specific standards may also be documented within individual
-repositories.
+aim for, and [`PATTERNS.md`](PATTERNS.md) for the code-level patterns
+(layering, error handling, REST conventions, standard packages) services are
+expected to follow. Project-specific standards may also be documented within
+individual repositories.
 
 ## Documentation
 
